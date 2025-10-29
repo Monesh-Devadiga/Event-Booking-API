@@ -8,7 +8,7 @@ app.get('/api/bookings', (request, response) => {
     response.status(200).json(bookings);
 });
 
-app.post('/api/bookings', (request, response) => {
+app.post('/api/bookings', (request, response) => {    //POST : http://localhost:3000/api/bookings
     const { name, email, phone, eventName } = request.body;
 
     if (!name || !email || !phone || !eventName) {
@@ -27,7 +27,9 @@ app.post('/api/bookings', (request, response) => {
     response.status(201).json({ message: 'Booking created successfully', booking: newBooking });
 });
 
-app.get('/api/bookings/:id', (request, response) => {
+app.get('/api/bookings/:id', (request, response) => {    //GET: By particular id- http://localhost:3000/api/bookings/1
+                                                         //GET: To get all posted data- http://localhost:3000/api/bookings/1
+
     const id = parseInt(request.params.id);
     const booking = bookings.find(b => b.id === id);
 
@@ -38,7 +40,8 @@ app.get('/api/bookings/:id', (request, response) => {
     response.status(200).json(booking);
 });
 
-app.put('/api/bookings/:id', (request, response) => {
+app.put('/api/bookings/:id', (request, response) => {    //PUT: Update participant details by id- http://localhost:3000/api/bookings/1
+
     const id = parseInt(request.params.id);
     const booking = bookings.find(b => b.id === id);
 
@@ -57,7 +60,8 @@ app.put('/api/bookings/:id', (request, response) => {
 });
 
 
-app.delete('/api/bookings/:id', (request, response) => {
+app.delete('/api/bookings/:id', (request, response) => {    //DELETE: Cancel booking by id- http://localhost:3000/api/bookings/1
+
     const id = parseInt(request.params.id);
     const index = bookings.findIndex(b => b.id === id);
 
@@ -69,8 +73,12 @@ app.delete('/api/bookings/:id', (request, response) => {
     response.status(200).json({ message: 'Booking cancelled successfully', deleted });
 });
 
-
+/*
 const PORT = 3000;
 app.listen(PORT, () => {
-    console.log(`✅ Synergia Event Booking API running at http://localhost:${PORT}`);
+    console.log(`Synergia Event Booking API running at http://localhost:${PORT}`);
+});
+*/
+app.listen(3000, () => {    //Start the server
+    console.log(`Synergia Event Booking API running at http://localhost:3000`);
 });
